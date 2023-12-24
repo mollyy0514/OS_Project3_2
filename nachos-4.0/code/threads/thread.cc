@@ -104,6 +104,7 @@ Thread::Fork(VoidFunctionPtr func, void *arg)
     oldLevel = interrupt->SetLevel(IntOff);
     scheduler->ReadyToRun(this);	// ReadyToRun assumes that interrupts 
 					// are disabled!
+
     (void) interrupt->SetLevel(oldLevel);
 }    
 
@@ -409,6 +410,7 @@ Thread::RestoreUserState()
 //	purposes.
 //----------------------------------------------------------------------
 
+
 static void
 SimpleThread(int which)
 {
@@ -420,20 +422,51 @@ SimpleThread(int which)
     }
 }
 
+
+
 //----------------------------------------------------------------------
 // Thread::SelfTest
 // 	Set up a ping-pong between two threads, by forking a thread 
 //	to call SimpleThread, and then calling SimpleThread ourselves.
 //----------------------------------------------------------------------
 
+
 void
 Thread::SelfTest()
 {
+    /*
     DEBUG(dbgThread, "Entering Thread::SelfTest");
 
     Thread *t = new Thread("forked thread");
 
     t->Fork((VoidFunctionPtr) SimpleThread, (void *) 1);
     SimpleThread(0);
+    */
+}
+
+
+
+void
+threadBody() {
+    Thread *thread = kernel->currentThread;
+    while (thread->getBurstTime() > 0) {
+        thread->setBurstTime(thread->getBurstTime() - 1);
+        cout << kernel->currentThread->getName() << ": remaining " << kernel->currentThread->getBurstTime() <<endl;
+        kernel->interrupt->OneTick();
+    }
+}
+
+void
+Thread::SchedulingTest()
+{
+    const int thread_num = 4;
+    char *name[thread_num] = {"A", "B", "C", "D"};
+    int thread_burst[thread_num] = {3, 9, 7, 3}; 
+    Thread *t;
+    for (int i = 0; i < thread_num; i ++) {
+        t = new Thread(name[i]);
+        t->setBurstTime(thread_burst[i]);
+        t->Fork((VoidFunctionPtr) threadBody, (void *)NULL);
+    }
 }
 

@@ -204,7 +204,7 @@ Interrupt::YieldOnReturn()
 //	If there are no pending interrupts, stop.  There's nothing
 //	more for us to do.
 //----------------------------------------------------------------------
-void
+void 
 Interrupt::Idle()
 {
     DEBUG(dbgInt, "Machine idling; checking for interrupts.");

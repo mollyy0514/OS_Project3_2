@@ -20,12 +20,14 @@
 enum SchedulerType {
         RR,     // Round Robin
         SJF,
-        Priority
+        Priority,
+	FIFO	// newly added
 };
 
 class Scheduler {
   public:
-	Scheduler();		// Initialize list of ready threads 
+	Scheduler();		// Initialize list of ready threads
+	Scheduler(SchedulerType type);			 
 	~Scheduler();				// De-allocate ready list
 
 	void ReadyToRun(Thread* thread);	
@@ -37,6 +39,9 @@ class Scheduler {
 	void CheckToBeDestroyed();	// Check if thread that had been
     					// running needs to be deleted
 	void Print();			// Print contents of ready list
+
+	SchedulerType getSchedulerType() {return schedulerType;}
+        void setSchedulerType(SchedulerType t) {schedulerType = t;}
     
     // SelfTest for scheduler is implemented in class Thread
     
@@ -46,6 +51,7 @@ class Scheduler {
 					// but not running
 	Thread *toBeDestroyed;		// finishing thread to be destroyed
     					// by the next thread that runs
+	
 };
 
 #endif // SCHEDULER_H

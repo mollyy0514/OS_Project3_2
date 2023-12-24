@@ -10,7 +10,7 @@
 # of liability and disclaimer of warranty provisions.
 
 include ../Makefile.dep
-CC=gcc
+CC=gcc  
 CFLAGS=-I../lib -I../threads $(HOST)
 LD=gcc
 

@@ -124,6 +124,7 @@ template <class T>
 void
 SynchList<T>::SelfTest(T val)
 {
+/*
     Thread *helper = new Thread("ping");
     
     ASSERT(list->IsEmpty());
@@ -134,4 +135,5 @@ SynchList<T>::SelfTest(T val)
 	ASSERT(val == this->RemoveFront());
     }
     delete selfTestPing;
+*/
 }

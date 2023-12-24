@@ -31,9 +31,9 @@ LDFLAGS =
 # These definitions may change as the software is updated.
 # Some of them are also system dependent
 CPP=/lib/cpp
-CC = g++ -Wno-deprecated
-LD = g++ -Wno-deprecated
-AS = as
+CC = g++  -Wno-deprecated
+LD = g++  -Wno-deprecated
+AS = as 
 
 PROGRAM = nachos
 

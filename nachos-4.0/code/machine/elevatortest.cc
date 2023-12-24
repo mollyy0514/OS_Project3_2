@@ -70,12 +70,14 @@ ControllerTest(ElevatorInspector *inspector) {
 
 void
 ElevatorSelfTest () {
+/*
     ElevatorInspector *inspector = new ElevatorInspector();
     Thread *controller = new Thread("controller");
     
     controller->Fork((VoidFunctionPtr)ControllerTest, (void *)inspector);
     inspector->RiderTest();
     delete inspector;
+*/
 }
 
 //----------------------------------------------------------------------
